@@ -45,6 +45,7 @@ var redLedAr = [];
 var grnLedAr = [];
 var bluLedAr = [];
 var blinkLedAr = [];
+var customCandleShown = false;
 
 // Candles setup
 function candle(xpos, ypos, brightness, maxbrightness, minbrightness) {
@@ -125,15 +126,23 @@ var draw = function() {
     if (blinkLedAr.length) {
       customCandles = [];
       for (let bk of blinkLedAr) {
-        let d = parseInt(bk / 8);
-        let m = bk % 8;
+        let col = parseInt(bk / 8);
+        let row = bk % 8;
 
-        customCandles.push(new candle(d, m, 100+Math.round(Math.random()*150), 255-Math.round(Math.random()*30), 50+Math.round(Math.random()*30)) );
+        customCandles.push(new candle(row, col, 100+Math.round(Math.random()*150), 255-Math.round(Math.random()*30), 50+Math.round(Math.random()*30)) );
       }
-      for (let c of customCandles) {
-        c.burn();
+      if (customCandleShown) {
+        for (let c of customCandles) {
+          c.burn();
+        }
+      } else {
+        if (REDRAW) {
+          for (let c of customCandles) {
+            c.off();
+          }
+        }
       }
-    }
+    } // end of custom
 
   }
 
