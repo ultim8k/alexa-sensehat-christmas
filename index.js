@@ -107,6 +107,7 @@ var draw = function() {
     console.log('yeah');
     var customColor = [0,0,0];
     for (var i = 0; i < tree.length; i++){
+      customColor = [0,0,0];
       customTree[i] = k;
       console.log('==');
       console.log(customTree[i]);
