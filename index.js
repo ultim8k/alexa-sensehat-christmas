@@ -238,11 +238,12 @@ function respMessage (selected) {
   var message = 'Endpoints: ';
   endpoints.forEach(function (endpoint) {
     if (!selected || endpoint !== selected) {
-      message += '<span>/' + endpoint + '</span>,';
+      message += '<span>/' + endpoint + '</span>';
     } else {
-      message += '<b>/' + endpoint + '</b>,';
+      message += '<b>/' + endpoint + '</b>';
     }
+    message += ', ';
   });
-  message.replace(/\,$/, '');
+  message = message.replace(/\,\s*$/, '');
   return message;
 }
