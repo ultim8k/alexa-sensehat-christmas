@@ -189,9 +189,9 @@ app.get('/input', function (req, res) {
   grnLedAr = [];
   bluLedAr = [];
 
-  try { redLedAr = JSON.parse(redLedStr) || []; } catch() {}
-  try { grnLedAr = JSON.parse(grnLedStr) || []; } catch() {}
-  try { bluLedAr = JSON.parse(bluLedStr) || []; } catch() {}
+  try { redLedAr = JSON.parse(redLedStr) || []; } catch(e) { console.log(e); }
+  try { grnLedAr = JSON.parse(grnLedStr) || []; } catch(e) { console.log(e); }
+  try { bluLedAr = JSON.parse(bluLedStr) || []; } catch(e) { console.log(e); }
 
   TREESHOWN = false;
   CANDLESSHOWN = false;
@@ -202,15 +202,15 @@ app.get('/input', function (req, res) {
   res.send('input:' + ' red: ' + redLedStr + ' green: ' + grnLedStr + ' blue: ' + bluLedStr);
 });
 
-app.post('/input', function (req, res) {
-  // get the params from req.body
-  TREESHOWN = false;
-  CANDLESSHOWN = false;
-  CANDLESCOLOUR = 'yellow';
-  CUSTOMSHAPE = true;
-  REDRAW = true;
-  res.send('OK');
-});
+// app.post('/input', function (req, res) {
+//   // get the params from req.body
+//   TREESHOWN = false;
+//   CANDLESSHOWN = false;
+//   CANDLESCOLOUR = 'yellow';
+//   CUSTOMSHAPE = true;
+//   REDRAW = true;
+//   res.send('OK');
+// });
 
 app.get('/off', function (req, res) {
   TREESHOWN = false;
