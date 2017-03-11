@@ -47,9 +47,10 @@ function candle(xpos, ypos, brightness, maxbrightness, minbrightness) {
     this.minbrightness = minbrightness;
     this.brightnessincrease = false;
     this.light = function () {
-      sense.setPixel(this.xpos, this.ypos, r);
+      sense.setPixel(this.xpos, this.ypos, y);
     };
     this.burn = function(color) {
+      color = color || 'yellow';
       if (this.brightnessincrease) {
         this.brightness = this.brightness + BRIGHTNESSSTEP;
         if (this.brightness >= this.maxbrightness) {
@@ -63,7 +64,15 @@ function candle(xpos, ypos, brightness, maxbrightness, minbrightness) {
           this.brightnessincrease = true;
         }
       }
-      sense.setPixel(this.xpos, this.ypos, [this.brightness, this.brightness, 0]);
+      var colorCombination = [0, 0, 0];
+      if (color === 'red') {
+        colorCombination = [this.brightness, 0, 0];
+      } else if (color === 'blue') {
+        colorCombination = [0, 0, this.brightness];
+      } else {
+        colorCombination = [this.brightness, this.brightness, 0];
+      }
+      sense.setPixel(this.xpos, this.ypos, colorCombination);
     };
     this.off = function () {
       sense.setPixel(this.xpos, this.ypos, k);
@@ -78,8 +87,7 @@ for (var i = 0; i < candlepos.length; i++) {
 // Display logic
 var TREESHOWN = false;
 var CANDLESSHOWN = false;
-var CANDLESRED = false;
-var CANDLESBlue = false;
+var CANDLESCOLOUR = 'yellow';
 var REDRAW = true;
 
 var draw = function() {
@@ -95,12 +103,8 @@ var draw = function() {
   }
 
   if (CANDLESSHOWN) {
-    var color = 'red';
-    if (CANDLESRED) {
-
-    }
     for (let c of candles) {
-      c.burn(color);
+      c.burn(CANDLESCOLOUR);
     }
   } else {
     if (REDRAW) {
@@ -113,7 +117,7 @@ var draw = function() {
 }
 
 // Display cycle
-console.log("Starting Christmas Tree!");
+console.log('Starting Christmas Tree!');
 var display = setInterval(draw, 50);
 
 // Web interface
@@ -129,6 +133,7 @@ app.get('/tree', function (req, res) {
 app.get('/christmas', function (req, res) {
   TREESHOWN = true;
   CANDLESSHOWN = true;
+  CANDLESCOLOUR = 'yellow';
   REDRAW = true;
   res.send('OK!')
 })
@@ -136,7 +141,15 @@ app.get('/christmas', function (req, res) {
 app.get('/santa', function (req, res) {
   TREESHOWN = true;
   CANDLESSHOWN = true;
-  CANDLESRED = true;
+  CANDLESCOLOUR = 'red';
+  REDRAW = true;
+  res.send('OK!')
+})
+
+app.get('/awesome', function (req, res) {
+  TREESHOWN = true;
+  CANDLESSHOWN = true;
+  CANDLESCOLOUR = 'blue';
   REDRAW = true;
   res.send('OK!')
 })
@@ -149,7 +162,7 @@ app.get('/off', function (req, res) {
 })
 
 app.get('/', function (req, res) {
-  res.send('Endpoints: <b>/tree</b>, <b>/christmas</b>, <b>/off</b>')
+  res.send('Endpoints: <b>/tree</b>, <b>/christmas</b>, <b>/santa</b>, <b>/awesome</b>, <b>/off</b>')
 })
 
 app.listen(PORT, function () {
