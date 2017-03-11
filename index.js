@@ -128,7 +128,13 @@ var draw = function() {
         let col = parseInt(bk / 8);
         let row = bk % 8;
 
-        customCandles.push(new candle(row, col, 100+Math.round(Math.random()*150), 255-Math.round(Math.random()*30), 50+Math.round(Math.random()*30)) );
+        let brightness = 100+Math.round(Math.random()*150);
+        let maxbrightness = 255-Math.round(Math.random()*30);
+        let minbrightness = 50+Math.round(Math.random()*30);
+
+        console.log('new candle: ', row, col, brightness, maxbrightness, minbrightness);
+
+        customCandles.push(new candle(row, col, brightness, maxbrightness, minbrightness));
       }
       if (CANDLESSHOWN) {
         for (let c of customCandles) {
