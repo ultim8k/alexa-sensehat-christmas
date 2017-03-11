@@ -110,33 +110,32 @@ var draw = function() {
     for (let i = 0; i < tree.length; i++){
       customColor = [0,0,0];
       customTree[i] = [0,0,0];
-      console.log('==');
-      console.log(customTree[i]);
       if (redLedAr.indexOf(i) >= 0) { customColor[0] = 255; }
       if (grnLedAr.indexOf(i) >= 0) { customColor[1] = 255; }
       if (bluLedAr.indexOf(i) >= 0) { customColor[2] = 255; }
       customTree[i] = customColor;
-      console.log(customTree[i]);
-      console.log('--');
     };
     sense.setPixels(customTree);
+  } // end of custom
 
-    if (blinkLedAr.length) {
-      customCandles = [];
-      for (let blinkLedPos of blinkLedAr) {
-        let col = parseInt(blinkLedPos / 8);
-        let row = blinkLedPos % 8;
 
-        let brightness = 100+Math.round(Math.random()*150);
-        let maxbrightness = 255-Math.round(Math.random()*30);
-        let minbrightness = 50+Math.round(Math.random()*30);
+  if (CUSTOMSHAPE && blinkLedAr.length) {
+    customCandles = [];
+    for (let blinkLedPos of blinkLedAr) {
+      let col = parseInt(blinkLedPos / 8);
+      let row = blinkLedPos % 8;
 
-        console.log('new candle: ', row, col, brightness, maxbrightness, minbrightness);
+      let brightness = 100+Math.round(Math.random()*150);
+      let maxbrightness = 255-Math.round(Math.random()*30);
+      let minbrightness = 50+Math.round(Math.random()*30);
 
-        customCandles.push(new candle(row, col, brightness, maxbrightness, minbrightness));
-      }
+      console.log('new candle: ', row, col, brightness, maxbrightness, minbrightness);
+
+      customCandles.push(new candle(row, col, brightness, maxbrightness, minbrightness));
     }
+  }
 
+  if (CUSTOMSHAPE) {
     if (CANDLESSHOWN) {
       for (let c of customCandles) {
         c.burn('yellow');
@@ -148,7 +147,7 @@ var draw = function() {
         }
       }
     }
-  } // end of custom
+  }
 
   if (!TREESHOWN && !CUSTOMSHAPE) {
     CANDLESSHOWN = false;
