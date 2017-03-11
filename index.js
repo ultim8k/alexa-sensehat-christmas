@@ -44,6 +44,7 @@ var candlepos = [
 var redLedAr = [];
 var grnLedAr = [];
 var bluLedAr = [];
+var blinkLedAr = [];
 
 // Candles setup
 function candle(xpos, ypos, brightness, maxbrightness, minbrightness) {
@@ -105,8 +106,8 @@ var draw = function() {
 
   if (CUSTOMSHAPE && REDRAW) {
     console.log('yeah');
-    var customColor = [0,0,0];
-    for (var i = 0; i < tree.length; i++){
+    let customColor = [0,0,0];
+    for (let i = 0; i < tree.length; i++){
       customColor = [0,0,0];
       customTree[i] = [0,0,0];
       console.log('==');
@@ -119,6 +120,13 @@ var draw = function() {
       console.log('--');
     };
     sense.setPixels(customTree);
+
+    if (blinkLedAr.length) {
+      for (let c of blinkLedAr) {
+        c.burn();
+      }
+    }
+
   }
 
   if (!TREESHOWN && !CUSTOMSHAPE) {
@@ -186,17 +194,20 @@ app.get('/awesome', function (req, res) {
 
 app.get('/input', function (req, res) {
   // get the params from req.query
-  var redLedStr = (req.query && req.query.red) ? req.query.red : '[]';
-  var grnLedStr = (req.query && req.query.green) ? req.query.green : '[]';
-  var bluLedStr = (req.query && req.query.blue) ? req.query.blue : '[]';
+  let redLedStr = (req.query && req.query.red) ? req.query.red : '[]';
+  let grnLedStr = (req.query && req.query.green) ? req.query.green : '[]';
+  let bluLedStr = (req.query && req.query.blue) ? req.query.blue : '[]';
+  let blinkLedStr = (req.query && req.query.blink) ? req.query.blink : '[]';
 
   redLedAr = [];
   grnLedAr = [];
   bluLedAr = [];
+  blinkLedAr = [];
 
   try { redLedAr = JSON.parse(redLedStr) || []; } catch(e) { console.log(e); }
   try { grnLedAr = JSON.parse(grnLedStr) || []; } catch(e) { console.log(e); }
   try { bluLedAr = JSON.parse(bluLedStr) || []; } catch(e) { console.log(e); }
+  try { blinkLedAr = JSON.parse(blinkLedStr) || []; } catch(e) { console.log(e); }
 
   TREESHOWN = false;
   CANDLESSHOWN = false;
