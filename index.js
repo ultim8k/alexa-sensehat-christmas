@@ -118,7 +118,7 @@ var draw = function() {
     sense.setPixels(customTree);
   }
 
-  if (!TREESHOWN || !CUSTOMSHAPE) {
+  if (!TREESHOWN && !CUSTOMSHAPE) {
     CANDLESSHOWN = false;
     if (REDRAW) {
       sense.clear(0, 0, 0);
