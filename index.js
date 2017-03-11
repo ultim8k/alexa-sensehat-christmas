@@ -121,14 +121,14 @@ console.log('Starting Christmas Tree!');
 var display = setInterval(draw, 50);
 
 // Web interface
-var app = express()
+var app = express();
 
 app.get('/tree', function (req, res) {
   TREESHOWN = true;
   CANDLESSHOWN = false;
   REDRAW = true;
   res.send('Endpoints: <b>/tree</b>, <span>/christmas</span>, <span>/santa</span>, <span>/awesome</span>, <span>/off</span>')
-})
+});
 
 app.get('/christmas', function (req, res) {
   TREESHOWN = true;
@@ -136,7 +136,7 @@ app.get('/christmas', function (req, res) {
   CANDLESCOLOUR = 'yellow';
   REDRAW = true;
   res.send('Endpoints: <span>/tree</span>, <b>/christmas</b>, <span>/santa</span>, <span>/awesome</span>, <span>/off</span>')
-})
+});
 
 app.get('/santa', function (req, res) {
   TREESHOWN = true;
@@ -144,7 +144,7 @@ app.get('/santa', function (req, res) {
   CANDLESCOLOUR = 'red';
   REDRAW = true;
   res.send('Endpoints: <span>/tree</span>, <span>/christmas</span>, <b>/santa</b>, <span>/awesome</span>, <span>/off</span>')
-})
+});
 
 app.get('/awesome', function (req, res) {
   TREESHOWN = true;
@@ -152,19 +152,41 @@ app.get('/awesome', function (req, res) {
   CANDLESCOLOUR = 'blue';
   REDRAW = true;
   res.send('Endpoints: <span>/tree</span>, <span>/christmas</span>, <span>/santa</span>, <b>/awesome</b>, <span>/off</span>')
-})
+});
+
+app.get('/input', function (req, res) {
+  // get the params from req.query
+  var red = (req.query && req.query.red) ? req.query.red : '';
+  var green = (req.query && req.query.green) ? req.query.green : '';
+  var blue = (req.query && req.query.blue) ? req.query.blue : '';
+  TREESHOWN = false;
+  CANDLESSHOWN = false;
+  CANDLESCOLOUR = 'yellow';
+  REDRAW = true;
+  // res.send('OK');
+  res.send(red + green + blue);
+});
+
+app.post('/input', function (req, res) {
+  // get the params from req.body
+  TREESHOWN = false;
+  CANDLESSHOWN = false;
+  CANDLESCOLOUR = 'yellow';
+  REDRAW = true;
+  res.send('OK');
+});
 
 app.get('/off', function (req, res) {
   TREESHOWN = false;
   CANDLESSHOWN = false;
   REDRAW = true;
   res.send('Endpoints: <span>/tree</span>, <span>/christmas</span>, <span>/santa</span>, <span>/awesome</span>, <b>/off</b>')
-})
+});
 
 app.get('/', function (req, res) {
   res.send('Endpoints: <b>/tree</b>, <b>/christmas</b>, <b>/santa</b>, <b>/awesome</b>, <b>/off</b>')
-})
+});
 
 app.listen(PORT, function () {
   console.log('Christmas tree app listening on port '+PORT)
-})
+});
