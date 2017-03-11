@@ -104,11 +104,14 @@ var draw = function() {
   }
 
   if (CUSTOMSHAPE && REDRAW) {
+    console.log('yeah');
     for (var i = 0; i <= tree.length; i++){
       customTree[i] = tree[i];
+      console.log(customTree[i]);
       if (redLedAr.indexOf(i) >= 0) { customTree[i] = r; }
       if (grnLedAr.indexOf(i) >= 0) { customTree[i] = g; }
       if (bluLedAr.indexOf(i) >= 0) { customTree[i] = b; }
+      console.log(customTree[i]);
     };
     sense.setPixels(customTree);
   }
