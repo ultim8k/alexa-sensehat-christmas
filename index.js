@@ -38,6 +38,11 @@ var candlepos = [
   [5, 3]
 ];
 
+// Custom led shapes
+var redLedAr = [];
+var grnLedAr = [];
+var bluLedAr = [];
+
 // Candles setup
 function candle(xpos, ypos, brightness, maxbrightness, minbrightness) {
     this.xpos = xpos;
@@ -89,10 +94,19 @@ var TREESHOWN = false;
 var CANDLESSHOWN = false;
 var CANDLESCOLOUR = 'yellow';
 var REDRAW = true;
+var CUSTOMSHAPE = false;
 
 var draw = function() {
   if (TREESHOWN && REDRAW) {
     sense.setPixels(tree);
+  }
+
+  if (CUSTOMSHAPE && REDRAW) {
+    for (var i = 0; i <= tree.length; i++){
+      if (redLedAr.indexof(i)) { tree[i] = r; }
+      if (grnLedAr.indexof(i)) { tree[i] = g; }
+      if (bluLedAr.indexof(i)) { tree[i] = b; }
+    };
   }
 
   if (!TREESHOWN) {
@@ -126,6 +140,7 @@ var app = express();
 app.get('/tree', function (req, res) {
   TREESHOWN = true;
   CANDLESSHOWN = false;
+  CUSTOMSHAPE = false;
   REDRAW = true;
   res.send('Endpoints: <b>/tree</b>, <span>/christmas</span>, <span>/santa</span>, <span>/awesome</span>, <span>/off</span>')
 });
@@ -134,6 +149,7 @@ app.get('/christmas', function (req, res) {
   TREESHOWN = true;
   CANDLESSHOWN = true;
   CANDLESCOLOUR = 'yellow';
+  CUSTOMSHAPE = false;
   REDRAW = true;
   res.send('Endpoints: <span>/tree</span>, <b>/christmas</b>, <span>/santa</span>, <span>/awesome</span>, <span>/off</span>')
 });
@@ -142,6 +158,7 @@ app.get('/santa', function (req, res) {
   TREESHOWN = true;
   CANDLESSHOWN = true;
   CANDLESCOLOUR = 'red';
+  CUSTOMSHAPE = false;
   REDRAW = true;
   res.send('Endpoints: <span>/tree</span>, <span>/christmas</span>, <b>/santa</b>, <span>/awesome</span>, <span>/off</span>')
 });
@@ -150,21 +167,32 @@ app.get('/awesome', function (req, res) {
   TREESHOWN = true;
   CANDLESSHOWN = true;
   CANDLESCOLOUR = 'blue';
+  CUSTOMSHAPE = false;
   REDRAW = true;
   res.send('Endpoints: <span>/tree</span>, <span>/christmas</span>, <span>/santa</span>, <b>/awesome</b>, <span>/off</span>')
 });
 
 app.get('/input', function (req, res) {
   // get the params from req.query
-  var red = (req.query && req.query.red) ? req.query.red : '';
-  var green = (req.query && req.query.green) ? req.query.green : '';
-  var blue = (req.query && req.query.blue) ? req.query.blue : '';
+  var redLedStr = (req.query && req.query.red) ? req.query.red : '[]';
+  var grnLedStr = (req.query && req.query.green) ? req.query.green : '[]';
+  var bluLedStr = (req.query && req.query.blue) ? req.query.blue : '[]';
+
+  redLedAr = [];
+  grnLedAr = [];
+  bluLedAr = [];
+
+  try { redLedAr = JSON.parse(redLedStr) || []; } catch() {}
+  try { grnLedAr = JSON.parse(grnLedStr) || []; } catch() {}
+  try { bluLedAr = JSON.parse(bluLedStr) || []; } catch() {}
+
   TREESHOWN = false;
   CANDLESSHOWN = false;
   CANDLESCOLOUR = 'yellow';
+  CUSTOMSHAPE = true;
   REDRAW = true;
   // res.send('OK');
-  res.send(red + green + blue);
+  res.send('input:' + ' red: ' + redLedStr + ' green: ' + grnLedStr + ' blue: ' + bluLedStr);
 });
 
 app.post('/input', function (req, res) {
@@ -172,6 +200,7 @@ app.post('/input', function (req, res) {
   TREESHOWN = false;
   CANDLESSHOWN = false;
   CANDLESCOLOUR = 'yellow';
+  CUSTOMSHAPE = true;
   REDRAW = true;
   res.send('OK');
 });
@@ -179,6 +208,7 @@ app.post('/input', function (req, res) {
 app.get('/off', function (req, res) {
   TREESHOWN = false;
   CANDLESSHOWN = false;
+  CUSTOMSHAPE = false;
   REDRAW = true;
   res.send('Endpoints: <span>/tree</span>, <span>/christmas</span>, <span>/santa</span>, <span>/awesome</span>, <b>/off</b>')
 });
