@@ -105,13 +105,15 @@ var draw = function() {
 
   if (CUSTOMSHAPE && REDRAW) {
     console.log('yeah');
+    var customColor = [0,0,0];
     for (var i = 0; i < tree.length; i++){
       customTree[i] = k;
       console.log('==');
       console.log(customTree[i]);
-      if (redLedAr.indexOf(i) >= 0) { customTree[i][0] = 255; }
-      if (grnLedAr.indexOf(i) >= 0) { customTree[i][1] = 255; }
-      if (bluLedAr.indexOf(i) >= 0) { customTree[i][2] = 255; }
+      if (redLedAr.indexOf(i) >= 0) { customColor[0] = 255; }
+      if (grnLedAr.indexOf(i) >= 0) { customColor[1] = 255; }
+      if (bluLedAr.indexOf(i) >= 0) { customColor[2] = 255; }
+      customTree[i] = customColor;
       console.log(customTree[i]);
       console.log('--');
     };
