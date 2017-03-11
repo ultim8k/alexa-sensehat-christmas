@@ -235,7 +235,7 @@ app.get('/input', function (req, res) {
   REDRAW = true;
   let msg = respMessage('input');
   msg += '<br>';
-  msg += 'You gave: ' + 'input:' + ' red: ' + redLedStr + ' green: ' + grnLedStr + ' blue: ' + bluLedStr;
+  msg += 'You gave: ' + 'input:' + '<br>' + ' red: ' + redLedStr  + '<br>' + ' green: ' + grnLedStr  + '<br>' + ' blue: ' + bluLedStr;
   res.send(msg);
 });
 
@@ -266,7 +266,7 @@ function respMessage (selected) {
     if (!selected || endpoint !== selected) {
       message += '<a href="' + path + '">/' + endpoint + '</a>';
     } else {
-      message += '<b>' + endpoint + '</b>';
+      message += '<b>/' + endpoint + '</b>';
     }
     message += ', ';
   });
