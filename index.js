@@ -135,20 +135,20 @@ var draw = function() {
 
         customCandles.push(new candle(row, col, brightness, maxbrightness, minbrightness));
       }
-      if (CANDLESSHOWN) {
+    }
+
+    if (CANDLESSHOWN) {
+      for (let c of customCandles) {
+        c.burn('yellow');
+      }
+    } else {
+      if (REDRAW) {
         for (let c of customCandles) {
-          c.burn('red');
-        }
-      } else {
-        if (REDRAW) {
-          for (let c of customCandles) {
-            c.off();
-          }
+          c.off();
         }
       }
-    } // end of custom
-
-  }
+    }
+  } // end of custom
 
   if (!TREESHOWN && !CUSTOMSHAPE) {
     CANDLESSHOWN = false;
