@@ -266,10 +266,14 @@ function respMessage (selected) {
   var endpoints = ['tree', 'christmas', 'santa', 'awesome', 'input', 'off'];
   var message = 'Endpoints: ';
   endpoints.forEach(function (endpoint) {
+    let path = '/' + endpoint;
+    if (endpoint === 'input') {
+      path = '/input?green=[2,3,9,10,11,12,17,19,20,25,26,27,33,34,35,42,43,44,45,46,50,51,52]&red=[16,23,28,29,30,31,36,37,38,39,58,60]&blue=[18,23,28,29,30,31,36,37,38,39]&blink=[62,63]'
+    }
     if (!selected || endpoint !== selected) {
-      message += '<a href="/' + endpoint + '">/' + endpoint + '</a>';
+      message += '<a href="' + path + '">/' + endpoint + '</a>';
     } else {
-      message += '<b>/' + endpoint + '</b>';
+      message += '<b>' + path + '</b>';
     }
     message += ', ';
   });
