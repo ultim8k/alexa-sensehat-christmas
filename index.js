@@ -109,9 +109,9 @@ var draw = function() {
       customTree[i] = k;
       console.log('==');
       console.log(customTree[i]);
-      if (redLedAr.indexOf(i) >= 0) { customTree[i] = r; }
-      if (grnLedAr.indexOf(i) >= 0) { customTree[i] = g; }
-      if (bluLedAr.indexOf(i) >= 0) { customTree[i] = b; }
+      if (redLedAr.indexOf(i) >= 0) { customTree[i][0] = 255; }
+      if (grnLedAr.indexOf(i) >= 0) { customTree[i][1] = 255; }
+      if (bluLedAr.indexOf(i) >= 0) { customTree[i][2] = 255; }
       console.log(customTree[i]);
       console.log('--');
     };
