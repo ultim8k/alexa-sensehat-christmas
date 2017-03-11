@@ -154,7 +154,7 @@ app.get('/tree', function (req, res) {
   CANDLESSHOWN = false;
   CUSTOMSHAPE = false;
   REDRAW = true;
-  res.send('Endpoints: <b>/tree</b>, <span>/christmas</span>, <span>/santa</span>, <span>/awesome</span>, <span>/off</span>')
+  res.send(respMessage('tree'));
 });
 
 app.get('/christmas', function (req, res) {
@@ -163,7 +163,7 @@ app.get('/christmas', function (req, res) {
   CANDLESCOLOUR = 'yellow';
   CUSTOMSHAPE = false;
   REDRAW = true;
-  res.send('Endpoints: <span>/tree</span>, <b>/christmas</b>, <span>/santa</span>, <span>/awesome</span>, <span>/off</span>')
+  res.send(respMessage('christmas'));
 });
 
 app.get('/santa', function (req, res) {
@@ -172,7 +172,7 @@ app.get('/santa', function (req, res) {
   CANDLESCOLOUR = 'red';
   CUSTOMSHAPE = false;
   REDRAW = true;
-  res.send('Endpoints: <span>/tree</span>, <span>/christmas</span>, <b>/santa</b>, <span>/awesome</span>, <span>/off</span>')
+  res.send(respMessage('santa'));
 });
 
 app.get('/awesome', function (req, res) {
@@ -181,7 +181,7 @@ app.get('/awesome', function (req, res) {
   CANDLESCOLOUR = 'blue';
   CUSTOMSHAPE = false;
   REDRAW = true;
-  res.send('Endpoints: <span>/tree</span>, <span>/christmas</span>, <span>/santa</span>, <b>/awesome</b>, <span>/off</span>')
+  res.send(respMessage('awesome'));
 });
 
 app.get('/input', function (req, res) {
@@ -222,13 +222,27 @@ app.get('/off', function (req, res) {
   CANDLESSHOWN = false;
   CUSTOMSHAPE = false;
   REDRAW = true;
-  res.send('Endpoints: <span>/tree</span>, <span>/christmas</span>, <span>/santa</span>, <span>/awesome</span>, <b>/off</b>')
+  res.send(respMessage('off'));
 });
 
 app.get('/', function (req, res) {
-  res.send('Endpoints: <b>/tree</b>, <b>/christmas</b>, <b>/santa</b>, <b>/awesome</b>, <b>/off</b>')
+  res.send(respMessage());
 });
 
 app.listen(PORT, function () {
-  console.log('Christmas tree app listening on port '+PORT)
+  console.log('Christmas tree app listening on port ' + PORT);
 });
+
+function respMessage (selected) {
+  var endpoints = ['tree', 'christmas', 'santa', 'awesome', 'input', 'off'];
+  var message = 'Endpoints: ';
+  endpoints.forEach(function (endpoint) {
+    if (!selected || endpoint !== selected) {
+      message += '<span>/' + endpoint + '</span>,';
+    } else {
+      message += '<b>/' + endpoint + '</b>,';
+    }
+  });
+  message.replace(/\,$/, '');
+  return message;
+}
