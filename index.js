@@ -236,7 +236,7 @@ app.get('/input', function (req, res) {
   let msg = respMessage('input');
   msg += '<br>';
   msg += 'You gave: ' + 'input:' + ' red: ' + redLedStr + ' green: ' + grnLedStr + ' blue: ' + bluLedStr;
-  res.send();
+  res.send(msg);
 });
 
 app.get('/off', function (req, res) {
