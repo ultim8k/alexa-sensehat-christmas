@@ -233,18 +233,11 @@ app.get('/input', function (req, res) {
   CANDLESCOLOUR = 'yellow';
   CUSTOMSHAPE = true;
   REDRAW = true;
-  res.send('input:' + ' red: ' + redLedStr + ' green: ' + grnLedStr + ' blue: ' + bluLedStr);
+  let msg = respMessage('input');
+  msg += '<br>';
+  msg += 'You gave: ' + 'input:' + ' red: ' + redLedStr + ' green: ' + grnLedStr + ' blue: ' + bluLedStr;
+  res.send();
 });
-
-// app.post('/input', function (req, res) {
-//   // get the params from req.body
-//   TREESHOWN = false;
-//   CANDLESSHOWN = false;
-//   CANDLESCOLOUR = 'yellow';
-//   CUSTOMSHAPE = true;
-//   REDRAW = true;
-//   res.send('OK');
-// });
 
 app.get('/off', function (req, res) {
   TREESHOWN = false;
