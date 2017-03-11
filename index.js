@@ -128,12 +128,12 @@ var draw = function() {
     }
   }
 
-  if (CANDLESSHOWN) {
+  if (CANDLESSHOWN && !CUSTOMSHAPE) {
     for (let c of candles) {
       c.burn(CANDLESCOLOUR);
     }
   } else {
-    if (REDRAW) {
+    if (REDRAW && !CUSTOMSHAPE) {
       for (let c of candles) {
         c.off();
       }
