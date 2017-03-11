@@ -1,5 +1,5 @@
-"use strict";
-const sense = require("sense-hat-led").sync;
+'use strict';
+const sense = require('sense-hat-led').sync;
 const express = require('express')
 
 var PORT = parseInt(process.env.PORT) || 80;
@@ -9,6 +9,8 @@ var BRIGHTNESSSTEP = 10;
 var g = [0, 180, 0]; // Green
 var k = [0, 0, 0]; // Black
 var y = [255, 255, 0]; // Yellow
+var r = [255, 0, 0]; // Red
+var b = [0, 0, 255]; // Blue
 
 sense.setRotation(ROTATE);
 sense.clear(0, 0, 0);
@@ -45,9 +47,9 @@ function candle(xpos, ypos, brightness, maxbrightness, minbrightness) {
     this.minbrightness = minbrightness;
     this.brightnessincrease = false;
     this.light = function () {
-      sense.setPixel(this.xpos, this.ypos, y);
+      sense.setPixel(this.xpos, this.ypos, r);
     };
-    this.burn = function() {
+    this.burn = function(color) {
       if (this.brightnessincrease) {
         this.brightness = this.brightness + BRIGHTNESSSTEP;
         if (this.brightness >= this.maxbrightness) {
@@ -76,6 +78,8 @@ for (var i = 0; i < candlepos.length; i++) {
 // Display logic
 var TREESHOWN = false;
 var CANDLESSHOWN = false;
+var CANDLESRED = false;
+var CANDLESBlue = false;
 var REDRAW = true;
 
 var draw = function() {
@@ -91,8 +95,12 @@ var draw = function() {
   }
 
   if (CANDLESSHOWN) {
+    var color = 'red';
+    if (CANDLESRED) {
+
+    }
     for (let c of candles) {
-      c.burn();
+      c.burn(color);
     }
   } else {
     if (REDRAW) {
@@ -121,6 +129,14 @@ app.get('/tree', function (req, res) {
 app.get('/christmas', function (req, res) {
   TREESHOWN = true;
   CANDLESSHOWN = true;
+  REDRAW = true;
+  res.send('OK!')
+})
+
+app.get('/santa', function (req, res) {
+  TREESHOWN = true;
+  CANDLESSHOWN = true;
+  CANDLESRED = true;
   REDRAW = true;
   res.send('OK!')
 })
