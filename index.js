@@ -106,7 +106,7 @@ var draw = function() {
   if (CUSTOMSHAPE && REDRAW) {
     console.log('yeah');
     for (var i = 0; i < tree.length; i++){
-      customTree[i] = tree[i];
+      customTree[i] = k;
       console.log('==');
       console.log(customTree[i]);
       if (redLedAr.indexOf(i) >= 0) { customTree[i] = r; }
