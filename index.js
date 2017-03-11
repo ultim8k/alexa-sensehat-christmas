@@ -88,6 +88,7 @@ function candle(xpos, ypos, brightness, maxbrightness, minbrightness) {
 }
 
 var candles = [];
+var customCandles = [];
 for (var i = 0; i < candlepos.length; i++) {
   candles.push(new candle(candlepos[i][0], candlepos[i][1], 100+Math.round(Math.random()*150), 255-Math.round(Math.random()*30), 50+Math.round(Math.random()*30)) );
 }
@@ -122,7 +123,14 @@ var draw = function() {
     sense.setPixels(customTree);
 
     if (blinkLedAr.length) {
-      for (let c of blinkLedAr) {
+      customCandles = [];
+      for (let bk of blinkLedAr) {
+        let d = parseInt(bk / 8);
+        let m = bk % 8;
+
+        customCandles.push(new candle(d, m, 100+Math.round(Math.random()*150), 255-Math.round(Math.random()*30), 50+Math.round(Math.random()*30)) );
+      }
+      for (let c of customCandles) {
         c.burn();
       }
     }
