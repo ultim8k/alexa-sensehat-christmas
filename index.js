@@ -107,16 +107,18 @@ var draw = function() {
     console.log('yeah');
     for (var i = 0; i <= tree.length; i++){
       customTree[i] = tree[i];
+      console.log('==');
       console.log(customTree[i]);
       if (redLedAr.indexOf(i) >= 0) { customTree[i] = r; }
       if (grnLedAr.indexOf(i) >= 0) { customTree[i] = g; }
       if (bluLedAr.indexOf(i) >= 0) { customTree[i] = b; }
       console.log(customTree[i]);
+      console.log('--');
     };
     sense.setPixels(customTree);
   }
 
-  if (!TREESHOWN) {
+  if (!TREESHOWN || !CUSTOMSHAPE) {
     CANDLESSHOWN = false;
     if (REDRAW) {
       sense.clear(0, 0, 0);
