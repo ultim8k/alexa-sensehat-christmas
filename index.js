@@ -127,7 +127,7 @@ app.get('/tree', function (req, res) {
   TREESHOWN = true;
   CANDLESSHOWN = false;
   REDRAW = true;
-  res.send('OK!')
+  res.send('Endpoints: <b>/tree</b>, <span>/christmas</span>, <span>/santa</span>, <span>/awesome</span>, <span>/off</span>')
 })
 
 app.get('/christmas', function (req, res) {
@@ -135,7 +135,7 @@ app.get('/christmas', function (req, res) {
   CANDLESSHOWN = true;
   CANDLESCOLOUR = 'yellow';
   REDRAW = true;
-  res.send('OK!')
+  res.send('Endpoints: <span>/tree</span>, <b>/christmas</b>, <span>/santa</span>, <span>/awesome</span>, <span>/off</span>')
 })
 
 app.get('/santa', function (req, res) {
@@ -143,7 +143,7 @@ app.get('/santa', function (req, res) {
   CANDLESSHOWN = true;
   CANDLESCOLOUR = 'red';
   REDRAW = true;
-  res.send('OK!')
+  res.send('Endpoints: <span>/tree</span>, <span>/christmas</span>, <b>/santa</b>, <span>/awesome</span>, <span>/off</span>')
 })
 
 app.get('/awesome', function (req, res) {
@@ -151,14 +151,14 @@ app.get('/awesome', function (req, res) {
   CANDLESSHOWN = true;
   CANDLESCOLOUR = 'blue';
   REDRAW = true;
-  res.send('OK!')
+  res.send('Endpoints: <span>/tree</span>, <span>/christmas</span>, <span>/santa</span>, <b>/awesome</b>, <span>/off</span>')
 })
 
 app.get('/off', function (req, res) {
   TREESHOWN = false;
   CANDLESSHOWN = false;
   REDRAW = true;
-  res.send('OK!')
+  res.send('Endpoints: <span>/tree</span>, <span>/christmas</span>, <span>/santa</span>, <span>/awesome</span>, <b>/off</b>')
 })
 
 app.get('/', function (req, res) {
