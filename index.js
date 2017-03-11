@@ -266,7 +266,7 @@ function respMessage (selected) {
     if (!selected || endpoint !== selected) {
       message += '<a href="' + path + '">/' + endpoint + '</a>';
     } else {
-      message += '<b>' + path + '</b>';
+      message += '<b>' + endpoint + '</b>';
     }
     message += ', ';
   });
