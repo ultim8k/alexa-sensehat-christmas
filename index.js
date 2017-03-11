@@ -269,7 +269,7 @@ function respMessage (selected) {
   var message = 'Endpoints: ';
   endpoints.forEach(function (endpoint) {
     if (!selected || endpoint !== selected) {
-      message += '<span>/' + endpoint + '</span>';
+      message += '<a href="/' + endpoint + '">/' + endpoint + '</a>';
     } else {
       message += '<b>/' + endpoint + '</b>';
     }
