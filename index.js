@@ -28,6 +28,8 @@ g, g, g, g, g, g, g, k,
 k, k, k, g, k, k, k, k
 ];
 
+var customTree = [];
+
 // Candle positions
 var candlepos = [
   [3, 0],
@@ -103,10 +105,12 @@ var draw = function() {
 
   if (CUSTOMSHAPE && REDRAW) {
     for (var i = 0; i <= tree.length; i++){
-      if (redLedAr.indexof(i)) { tree[i] = r; }
-      if (grnLedAr.indexof(i)) { tree[i] = g; }
-      if (bluLedAr.indexof(i)) { tree[i] = b; }
+      customTree[i] = tree[i];
+      if (redLedAr.indexOf(i) >= 0) { customTree[i] = r; }
+      if (grnLedAr.indexOf(i) >= 0) { customTree[i] = g; }
+      if (bluLedAr.indexOf(i) >= 0) { customTree[i] = b; }
     };
+    sense.setPixels(customTree);
   }
 
   if (!TREESHOWN) {
