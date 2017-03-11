@@ -234,7 +234,7 @@ app.get('/input', function (req, res) {
   CUSTOMSHAPE = true;
   REDRAW = true;
   let msg = respMessage('input');
-  msg += '<br>';
+  msg += '<br><br>';
   msg += 'You gave: ' + 'input:' + '<br>' + ' red: ' + redLedStr  + '<br>' + ' green: ' + grnLedStr  + '<br>' + ' blue: ' + bluLedStr;
   res.send(msg);
 });
