@@ -105,7 +105,7 @@ var draw = function() {
 
   if (CUSTOMSHAPE && REDRAW) {
     console.log('yeah');
-    for (var i = 0; i <= tree.length; i++){
+    for (var i = 0; i < tree.length; i++){
       customTree[i] = tree[i];
       console.log('==');
       console.log(customTree[i]);
