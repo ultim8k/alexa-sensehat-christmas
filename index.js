@@ -106,7 +106,6 @@ var draw = function() {
   }
 
   if (CUSTOMSHAPE && REDRAW) {
-    console.log('yeah');
     let customColor = [0,0,0];
     for (let i = 0; i < tree.length; i++){
       customColor = [0,0,0];
@@ -124,9 +123,9 @@ var draw = function() {
 
     if (blinkLedAr.length) {
       customCandles = [];
-      for (let bk of blinkLedAr) {
-        let col = parseInt(bk / 8);
-        let row = bk % 8;
+      for (let blinkLedPos of blinkLedAr) {
+        let col = parseInt(blinkLedPos / 8);
+        let row = blinkLedPos % 8;
 
         let brightness = 100+Math.round(Math.random()*150);
         let maxbrightness = 255-Math.round(Math.random()*30);
@@ -138,7 +137,7 @@ var draw = function() {
       }
       if (CANDLESSHOWN) {
         for (let c of customCandles) {
-          c.burn();
+          c.burn('red');
         }
       } else {
         if (REDRAW) {
