@@ -45,7 +45,6 @@ var redLedAr = [];
 var grnLedAr = [];
 var bluLedAr = [];
 var blinkLedAr = [];
-var customCandleShown = false;
 
 // Candles setup
 function candle(xpos, ypos, brightness, maxbrightness, minbrightness) {
@@ -131,7 +130,7 @@ var draw = function() {
 
         customCandles.push(new candle(row, col, 100+Math.round(Math.random()*150), 255-Math.round(Math.random()*30), 50+Math.round(Math.random()*30)) );
       }
-      if (customCandleShown) {
+      if (CANDLESSHOWN) {
         for (let c of customCandles) {
           c.burn();
         }
@@ -227,7 +226,7 @@ app.get('/input', function (req, res) {
   try { blinkLedAr = JSON.parse(blinkLedStr) || []; } catch(e) { console.log(e); }
 
   TREESHOWN = false;
-  CANDLESSHOWN = false;
+  CANDLESSHOWN = !!blinkLedAr.length;
   CANDLESCOLOUR = 'yellow';
   CUSTOMSHAPE = true;
   REDRAW = true;
